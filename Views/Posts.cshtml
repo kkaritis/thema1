@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Post>
+
+<h1>Posts</h1>
+
+@foreach (var post in Model)
+{
+    <div>
+        <h2>@post.Title</h2>
+        <p>@post.Content</p>
+        <p>Posted by: @post.UserId on @post.PostedAt</p>
+        <p>Categories: @string.Join(", ", post.Categories)</p>
+    </div>
+}
+

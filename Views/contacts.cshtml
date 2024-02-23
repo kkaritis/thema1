@@ -1,0 +1,31 @@
+﻿@model List<User>
+
+<h1>Επαφές</h1>
+
+@if (Model.Count == 0)
+{
+    <p>Δεν έχετε καμία επαφή.</p>
+}
+else
+{
+    <ul>
+        @foreach (var contact in Model)
+        {
+            <li>
+                @contact.Username
+                <form asp-controller="Contacts" asp-action="RemoveContact" method="post">
+                    <input type="hidden" name="contactId" value="@contact.Id" />
+                    <button type="submit">Αφαίρεση</button>
+                </form>
+            </li>
+        }
+    </ul>
+}
+
+<h2>Προσθήκη Επαφής</h2>
+<form asp-controller="Contacts" asp-action="AddContact" method="post">
+    <select name="contactId" asp-items="@Model.Select(c => new SelectListItem(c.Username, c.Id.ToString()))">
+        <option value="">Επιλέξτε επαφή</option>
+    </select>
+    <button type="submit">Προσθήκη</button>
+</form>
